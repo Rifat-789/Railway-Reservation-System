@@ -31,7 +31,7 @@ It is designed for intermediate learners to strengthen core concepts like struct
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - C Programming Language  
 - Standard Libraries (`stdio.h`, `stdlib.h`, etc.)  
@@ -39,7 +39,7 @@ It is designed for intermediate learners to strengthen core concepts like struct
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 Railway-Reservation-System/
  │
@@ -51,7 +51,7 @@ Railway-Reservation-System/
 
 ---
 
-## 🚀 How to Run (Step-by-Step)
+##  How to Run (Step-by-Step)
 
 ### 1️⃣ Clone the repository
 
