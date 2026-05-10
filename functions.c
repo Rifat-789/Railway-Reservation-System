@@ -72,6 +72,7 @@ void printMenu(int choice){
 
     printf("1. User\n");
     printf("2. Admin\n");
+    printf("3. Exit\n");
     printf("Enter your choice: ");
     scanf("%d", &temp);
 
@@ -83,14 +84,17 @@ void printMenu(int choice){
         printf("5. Exit\n");
     }
 
-    if (temp == 2){
+    else if (temp == 2){
         printf("1. Check Train Status\n");
         printf("2. Edit Train status\n");
         printf("3. Check Passangers\n");
         printf("4. Edit Passanger Status\n");
         printf("5. Exit\n");
     }
-    
+
+    else {
+        choice = temp;
+    }
 }
 
 void bookTicket(User users[], int *countUser){
