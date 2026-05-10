@@ -25,8 +25,11 @@ typedef struct {
 void loadTrains(Train trains[], int *countTrain);
 void loadUsers(User users[], int *countUser);
 void loadAdmins(Admin admins[], int *countAdmin);
-void loadTitle(char title[], int padding);
-void loadMenu(int choice);
+void printTitle(char title[], int padding);
+void printMenu(int choice);
+void bookTicket(User users[], int *countUser);
+void checkStatus(User users[], Train trains[]);
+
 
 
 #endif
