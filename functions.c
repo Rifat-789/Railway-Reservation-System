@@ -50,11 +50,47 @@ void loadAdmins(Admin admins[], int *countAdmin){
 }
 
 void printTitle(char title[], int padding){
+    for (int i = 0; i < 40; i++){
+        printf("-");
+    }
+    printf("\n");
 
+    for (int i = 0; i < padding; i++){
+        printf(" ");
+    }
+    
+    printf("%s\n", title);
+
+    for (int i = 0; i < 40; i++){
+        printf("-");
+    }
+    printf("\n");
 }
 
 void printMenu(int choice){
+    int temp = 0;
 
+    printf("1. User\n");
+    printf("2. Admin\n");
+    printf("Enter your choice: ");
+    scanf("%d", &temp);
+
+    if (temp == 1){
+        printf("1. Book A Ticket\n");
+        printf("2. Check Status\n");
+        printf("3. Cancle Ticket\n");
+        printf("4. Edit Ticket\n");
+        printf("5. Exit\n");
+    }
+
+    if (temp == 2){
+        printf("1. Check Train Status\n");
+        printf("2. Edit Train status\n");
+        printf("3. Check Passangers\n");
+        printf("4. Edit Passanger Status\n");
+        printf("5. Exit\n");
+    }
+    
 }
 
 void bookTicket(User users[], int *countUser){
