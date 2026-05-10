@@ -29,6 +29,9 @@ void printTitle(char title[], int padding);
 void printMenu(int choice);
 void bookTicket(User users[], int *countUser);
 void checkStatus(User users[], Train trains[]);
+void saveTrains(Train trains[], int countTrain);
+void saveUsers(User users[], int countUser);
+void saveAdmins(Admin admins[], int countAdmin);
 
 
 

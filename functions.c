@@ -65,4 +65,47 @@ void checkStatus(User users[], Train trains[]){
 
 }
 
+void saveTrains(Train trains[], int countTrain){
+    FILE *pFile = fopen("train.dat", "wb");
 
+    if (pFile == NULL){
+        printf("Error saving the data!");
+        fclose(pFile);
+        return;
+    }
+
+    fwrite(&countTrain, sizeof(int), 1, pFile);
+    fwrite(trains, sizeof(Train), countTrain, pFile);
+
+    fclose(pFile);
+}
+
+void saveUsers(User users[], int countUser){
+    FILE *pFile = fopen("train.dat", "wb");
+
+    if (pFile == NULL){
+        printf("Error saving the data!");
+        fclose(pFile);
+        return;
+    }
+
+    fwrite(&countUser, sizeof(int), 1, pFile);
+    fwrite(users, sizeof(Train), countUser, pFile);
+
+    fclose(pFile);
+}
+
+void saveAdmins(Admin admins[], int countAdmin){
+    FILE *pFile = fopen("train.dat", "wb");
+
+    if (pFile == NULL){
+        printf("Error saving the data!");
+        fclose(pFile);
+        return;
+    }
+
+    fwrite(&countAdmin, sizeof(int), 1, pFile);
+    fwrite(admins, sizeof(Train), countAdmin, pFile);
+
+    fclose(pFile);
+}
