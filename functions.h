@@ -32,6 +32,7 @@ void checkStatus(User users[], Train trains[]);
 void saveTrains(Train trains[], int countTrain);
 void saveUsers(User users[], int countUser);
 void saveAdmins(Admin admins[], int countAdmin);
+void saveAll(Train trains[], User users[], Admin admins[], int countTrain, int countUser, int countAdmin);
 
 
 

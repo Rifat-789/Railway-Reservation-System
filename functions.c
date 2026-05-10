@@ -149,3 +149,9 @@ void saveAdmins(Admin admins[], int countAdmin){
 
     fclose(pFile);
 }
+
+void saveAll(Train trains[], User users[], Admin admins[], int countTrain, int countUser, int countAdmin){
+    saveTrains(trains, countTrain);
+    saveUsers(users, countUser);
+    saveAdmins(admins, countAdmin);
+}
