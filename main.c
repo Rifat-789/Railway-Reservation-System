@@ -20,69 +20,167 @@ int main(){
     loadTrains(trains, &countTrain);
     loadUsers(users, &countUser);
     loadAdmins(admins, &countAdmin);
+    
+    printTitle(title, padding);
 
-    do {
-        #ifdef _WIN32
-            system("clear");
-        #else
-            system("cls");
-        #endif
-        
-        printTitle(title, padding);
+    printf("1. User\n");
+    printf("2. Admin\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
 
-        printf("1. User");
-        printf("2. Admin");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice)
-        {
-        case 1:
-            #ifdef _WIN32
-                system("clear");
-            #else
-                system("cls");
-            #endif
+    if (choice == 1){
+        int tempChoice = 0;
+        printf("1. Book a ticket\n");
+        printf("2. Check Status\n");
+        printf("3. Cancle Ticket\n");
+        printf("4. Exit\n");
+        printf("Entet your choice: ");
+        scanf("%d", &tempChoice);
 
 
-            printf("Press enter to continue!");
-            getchar();
-            getchar();
-            break;
+        switch (tempChoice){
+            case 1:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
 
-        case 2:
-            #ifdef _WIN32
-                system("clear");
-            #else
-                system("cls");
-            #endif
+
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 2:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+                
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 3:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 4:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+                exit;
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+            
+                default:
+                break;
+        }
+    }
+
+        else if (choice == 2){
+            int tempChoice = 0;
+
+            printf("1. Check Status\n");
+            printf("2. Update Status\n");
+            printf("3. Check Passangers\n");
+            printf("4. Update Passangers\n");
+            printf("5. Exit\n");
+            printf("Enter your choice: ");
+            scanf("%d", &tempChoice);
+
+            switch (tempChoice)
+            {
+            case 1:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 2:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 3:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 4:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
+            case 5:
+                #ifdef _WIN32
+                    system("clear");
+                #else
+                    system("cls");
+                #endif
+
+                exit;
+                printf("Press enter to continue!");
+                getchar();
+                getchar();
+                break;
+
 
             
-            printf("Press enter to continue!");
-            getchar();
-            getchar();
-            break;
-
-        case 3:
-            #ifdef _WIN32
-                system("clear");
-            #else
-                system("cls");
-            #endif
-
-            exit;
-            printf("Press enter to continue!");
-            getchar();
-            getchar();
-            break;
-        
-        default:
-            break;
+            default:
+                break;
+            }
         }
-    
 
-    } while(choice != 3);
-
+        
 
 
 

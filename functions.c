@@ -78,7 +78,7 @@ void ticketGen(User users[], int countUser){
 }
 
 void bookTicket(User users[], int *countUser){
-
+    
 }
 
 void checkStatus(User users[], Train trains[]){
