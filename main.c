@@ -28,6 +28,8 @@ int main(){
     printf("Enter your choice: ");
     scanf("%d", &choice);
 
+
+    // For Users
     if (choice == 1){
         int tempChoice = 0;
         printf("1. Book a ticket\n");
@@ -46,7 +48,7 @@ int main(){
                     system("cls");
                 #endif
 
-
+                bookTicket(users, &countUser, trains, countTrain);
                 printf("Press enter to continue!");
                 getchar();
                 getchar();
@@ -95,6 +97,8 @@ int main(){
         }
     }
 
+
+    // For Admin
         else if (choice == 2){
             int tempChoice = 0;
 

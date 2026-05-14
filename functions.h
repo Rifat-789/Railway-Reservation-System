@@ -18,7 +18,7 @@ typedef struct {
 typedef struct {
     char destination[30];
     int trainId;
-    char cls[10];
+    int price;
 } Train;
 
 void loadTrains(Train trains[], int *countTrain);
@@ -26,7 +26,7 @@ void loadUsers(User users[], int *countUser);
 void loadAdmins(Admin admins[], int *countAdmin);
 void printTitle(char title[], int padding);
 void ticketGen(User users[], int countUser);
-void bookTicket(User users[], int *countUser);
+void bookTicket(User users[], int *countUser, Train trains[], int countTrain);
 void checkStatus(User users[], Train trains[]);
 void saveTrains(Train trains[], int countTrain);
 void saveUsers(User users[], int countUser);
