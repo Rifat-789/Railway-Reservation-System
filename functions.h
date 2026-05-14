@@ -7,7 +7,6 @@
 typedef struct {
     int tickerId;
     int seatCount;
-    char bookedSeats[100];
     int bill;
 } User;
 
@@ -26,7 +25,7 @@ void loadTrains(Train trains[], int *countTrain);
 void loadUsers(User users[], int *countUser);
 void loadAdmins(Admin admins[], int *countAdmin);
 void printTitle(char title[], int padding);
-void printMenu(int choice);
+void ticketGen(User users[]);
 void bookTicket(User users[], int *countUser);
 void checkStatus(User users[], Train trains[]);
 void saveTrains(Train trains[], int countTrain);

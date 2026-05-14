@@ -67,34 +67,14 @@ void printTitle(char title[], int padding){
     printf("\n");
 }
 
-void printMenu(int choice){
-    int temp = 0;
+void ticketGen(User users[], int countUser){
+    srand(time(NULL));
 
-    printf("1. User\n");
-    printf("2. Admin\n");
-    printf("3. Exit\n");
-    printf("Enter your choice: ");
-    scanf("%d", &temp);
+    int randPart = rand() % 9000 + 1000;
 
-    if (temp == 1){
-        printf("1. Book A Ticket\n");
-        printf("2. Check Status\n");
-        printf("3. Cancle Ticket\n");
-        printf("4. Edit Ticket\n");
-        printf("5. Exit\n");
-    }
+    int temp = countUser + 1;
 
-    else if (temp == 2){
-        printf("1. Check Train Status\n");
-        printf("2. Edit Train status\n");
-        printf("3. Check Passangers\n");
-        printf("4. Edit Passanger Status\n");
-        printf("5. Exit\n");
-    }
-
-    else {
-        choice = temp;
-    }
+    users[countUser].tickerId = (temp * 10000) + randPart;
 }
 
 void bookTicket(User users[], int *countUser){

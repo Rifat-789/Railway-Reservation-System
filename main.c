@@ -29,9 +29,11 @@ int main(){
         #endif
         
         printTitle(title, padding);
-        printfMenu(choice);
-        scanf("%d", &choice);
 
+        printf("1. User");
+        printf("2. Admin");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
         switch (choice)
         {
