@@ -176,6 +176,50 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
     }
 }
 
+void cancleTicket(User users[], int *countUser){
+    int temp = 0;
+    int index = -1;
+    char confirm;
+
+    printf("Enter Ticket Id: ");
+    if(scanf("%d", &temp) != 1){
+        printf("Invalid Id! Id must be a number.");
+        while(getchar() != '\n');
+        return;
+    }
+
+    for(int i = 0; i < *countUser; i++){
+        if(temp == users[i].ticketId){
+            index = i;
+            break;
+        }
+    }
+
+    if(index == -1){
+        printf("Ticket not found!");
+        return;
+    }
+
+    printf("Ticket ID: %d\n", users[index].ticketId);
+    printf("Trian ID: %s\n", users[index].trainId);
+
+    printf("\nConfirm Delete? (Y/N): ");
+    scanf(" %c", &confirm);
+    confirm = toupper(confirm);
+
+    if(confirm != 'Y'){
+        printf("Deletion Cancelled\n");
+        return;
+    }
+
+    for(int i = index; i < *countUser - 1; i++){
+        users[i] = users[i + 1];
+    }
+
+    (*countUser)--;
+    printf("Item deleted successfully.\n");
+}
+
 void saveTrains(Train trains[], int countTrain){
     FILE *pFile = fopen("train.dat", "wb");
 

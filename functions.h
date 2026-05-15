@@ -32,6 +32,7 @@ void printTitle(char title[], int padding);
 void ticketGen(User users[], int countUser);
 void bookTicket(User users[], int *countUser, Train trains[], int countTrain);
 void checkStatus(User users[], Train trains[], int countUser, int countTrain);
+void cancleTicket(User users[], int *countUser);
 void saveTrains(Train trains[], int countTrain);
 void saveUsers(User users[], int countUser);
 void saveAdmins(Admin admins[], int countAdmin);
