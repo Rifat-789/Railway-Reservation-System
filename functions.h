@@ -5,9 +5,11 @@
 #include<stdlib.h>
 
 typedef struct {
-    int tickerId;
-    int seatCount;
-    int bill;
+    int ticketId;
+    int trainId;
+    int ticketCount;
+    int seats[10];
+    int totalBill;
 } User;
 
 typedef struct {
@@ -19,6 +21,8 @@ typedef struct {
     char destination[30];
     int trainId;
     int price;
+    int totalSeats;
+    int bookedSeats;
 } Train;
 
 void loadTrains(Train trains[], int *countTrain);
@@ -27,7 +31,7 @@ void loadAdmins(Admin admins[], int *countAdmin);
 void printTitle(char title[], int padding);
 void ticketGen(User users[], int countUser);
 void bookTicket(User users[], int *countUser, Train trains[], int countTrain);
-void checkStatus(User users[], Train trains[]);
+void checkStatus(User users[], Train trains[], int countUser, int countTrain);
 void saveTrains(Train trains[], int countTrain);
 void saveUsers(User users[], int countUser);
 void saveAdmins(Admin admins[], int countAdmin);
