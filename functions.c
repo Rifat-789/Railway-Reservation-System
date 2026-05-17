@@ -100,7 +100,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     int index = tempChoice - 1;
 
-    if (trains[index].availableSeats == 0){
+    if (trains[index].availableSeats == 0){                 // Availability check
         printf("Sorry, this train is fully booked!");
         return;
     }
@@ -108,21 +108,21 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     printf("How many tickets: ");
     scanf("%d", &users[*countUser].ticketCount);
 
-    if(users[*countUser].ticketCount < 1 || users[*countUser].ticketCount > 10){
+    if(users[*countUser].ticketCount < 1 || users[*countUser].ticketCount > 10){                // Max 10 tickets
         printf("Maximum 10 tickets allowed!\n");
         return;
     }
 
-    if (users[*countUser].ticketCount > trains[index].availableSeats){
+    if (users[*countUser].ticketCount > trains[index].availableSeats){                          // Available seats check upon ticket count
         printf("Not enough seats! Only %d seats availavble.\n", trains[index].availableSeats);
         return;
     }
 
-    users[*countUser].trainId = trains[index].trainId;
+    users[*countUser].trainId = trains[index].trainId;                      // Stores train id in user struct
 
     printf("\nAssigned Seats: ");
 
-    for(int i = 0; i < users[*countUser].ticketCount; i++){
+    for(int i = 0; i < users[*countUser].ticketCount; i++){                 // Assigns seat numbers continually
         users[*countUser].seats[i] = trains[index].nextSeat;
         printf("%d ", trains[index].nextSeat);
 
@@ -132,7 +132,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     printf("\n");
 
-    users[*countUser].totalBill = trains[index].price * users[*countUser].ticketCount;
+    users[*countUser].totalBill = trains[index].price * users[*countUser].ticketCount;                  // Calculates total bill 
 
     ticketGen(users, *countUser);
 
@@ -187,8 +187,57 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
     }
 }
 
-void cancleTicket(User users[], int *countUser){
-    
+void cancleTicket(User users[], int *countUser, Train trains[], int countTrain){
+    int tempId;
+    int index = -1;
+    char confirm;
+
+    printf("\n====== CANCLE TICKET ======\n");
+    printf("Enter Ticket ID to Cancle: ");
+    if(scanf("%d", &tempId) != 1){
+        printf("Invalid Id! Id must be a number.");
+        while(getchar() != '\n');
+        return;
+    }
+
+    for (int i = 0; i < *countUser; i++){
+        if (tempId == users[i].ticketId){
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1){
+        printf("\nTicket Not Found!\n");
+        return;
+    }
+
+    printf("Canceling the following booking: \n");
+    checkStatus(users, trains, countUser, countTrain);
+
+    printf("Are you sure you want to cancle? (y/n): ");
+    scanf("% c", &confirm);
+
+    if (confirm != 'y' && confirm != 'Y'){
+        printf("Cancellation aborted.\n");
+        return;
+    }
+
+    for (int i = 0; i < countTrain; i++){                           // Restore trains availave seats
+        if (trains[i].trainId == users[index].trainId){
+            trains[i].availableSeats += users[index].ticketCount;
+            break;
+        }
+    }
+
+    for (int i = index; i < *countUser - 1; i++){
+        users[i] = users[i + 1];
+    }
+
+    (*countUser)--;
+
+    printf("Ticket canceled successfully.\n");
+
 }
 
 void saveTrains(Train trains[], int countTrain){
