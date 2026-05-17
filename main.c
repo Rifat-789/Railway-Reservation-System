@@ -61,7 +61,7 @@ int main(){
                     system("cls");
                 #endif
 
-                
+                checkStatus(users, trains, countUser, countTrain);
                 printf("Press enter to continue!");
                 getchar();
                 getchar();
@@ -74,6 +74,7 @@ int main(){
                     system("cls");
                 #endif
 
+                cancleTicket(users, &countUser);
                 printf("Press enter to continue!");
                 getchar();
                 getchar();

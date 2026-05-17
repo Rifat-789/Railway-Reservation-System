@@ -18,11 +18,12 @@ typedef struct {
 } Admin;
 
 typedef struct {
-    char destination[30];
+    char destination[50];
     int trainId;
     int price;
     int totalSeats;
-    int bookedSeats;
+    int availableSeats;
+    int nextSeat;
 } Train;
 
 void loadTrains(Train trains[], int *countTrain);

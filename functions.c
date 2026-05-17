@@ -83,12 +83,10 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     printf("\n======= AVAILABLE TRAINS =======\n");
 
     for(int i = 0; i < countTrain; i++){
-
         printf("%d. %s\n", i + 1, trains[i].destination);
-
         printf("Train ID : %d\n", trains[i].trainId);
-
         printf("Price    : %d\n\n", trains[i].price);
+        printf("Availabel Seats: %d\n", trains[i].availableSeats);
     }
 
     printf("Select Train: ");
@@ -102,12 +100,21 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     int index = tempChoice - 1;
 
+    if (trains[index].availableSeats == 0){
+        printf("Sorry, this train is fully booked!");
+        return;
+    }
+
     printf("How many tickets: ");
     scanf("%d", &users[*countUser].ticketCount);
 
     if(users[*countUser].ticketCount < 1 || users[*countUser].ticketCount > 10){
-
         printf("Maximum 10 tickets allowed!\n");
+        return;
+    }
+
+    if (users[*countUser].ticketCount > trains[index].availableSeats){
+        printf("Not enough seats! Only %d seats availavble.\n", trains[index].availableSeats);
         return;
     }
 
@@ -116,10 +123,14 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     printf("\nAssigned Seats: ");
 
     for(int i = 0; i < users[*countUser].ticketCount; i++){
-        users[*countUser].seats[i] = (*countUser * 10) + i + 1;
+        users[*countUser].seats[i] = trains[index].nextSeat;
+        printf("%d ", trains[index].nextSeat);
 
-        printf("%d ", users[*countUser].seats[i]);
+        trains[index].nextSeat++;
+        trains[index].availableSeats--;
     }
+
+    printf("\n");
 
     users[*countUser].totalBill = trains[index].price * users[*countUser].ticketCount;
 
@@ -177,47 +188,7 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
 }
 
 void cancleTicket(User users[], int *countUser){
-    int temp = 0;
-    int index = -1;
-    char confirm;
-
-    printf("Enter Ticket Id: ");
-    if(scanf("%d", &temp) != 1){
-        printf("Invalid Id! Id must be a number.");
-        while(getchar() != '\n');
-        return;
-    }
-
-    for(int i = 0; i < *countUser; i++){
-        if(temp == users[i].ticketId){
-            index = i;
-            break;
-        }
-    }
-
-    if(index == -1){
-        printf("Ticket not found!");
-        return;
-    }
-
-    printf("Ticket ID: %d\n", users[index].ticketId);
-    printf("Trian ID: %s\n", users[index].trainId);
-
-    printf("\nConfirm Delete? (Y/N): ");
-    scanf(" %c", &confirm);
-    confirm = toupper(confirm);
-
-    if(confirm != 'Y'){
-        printf("Deletion Cancelled\n");
-        return;
-    }
-
-    for(int i = index; i < *countUser - 1; i++){
-        users[i] = users[i + 1];
-    }
-
-    (*countUser)--;
-    printf("Item deleted successfully.\n");
+    
 }
 
 void saveTrains(Train trains[], int countTrain){
