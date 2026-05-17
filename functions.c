@@ -187,7 +187,7 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
     }
 }
 
-void cancleTicket(User users[], int *countUser, Train trains[], int countTrain){
+void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
     int tempId;
     int index = -1;
     char confirm;
@@ -238,6 +238,28 @@ void cancleTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     printf("Ticket canceled successfully.\n");
 
+}
+
+void addTrain(Train trains[], int *countTrain){
+
+    printf("Enter Train Destination: ");
+    scanf("%s", &trains[*countTrain].destination);
+
+    printf("\nEnter Train ID: ");
+    scanf("%d", &trains[*countTrain].trainId);
+
+    printf("\nEnter Ticket price: ");
+    scanf("%d", &trains[*countTrain].price);
+
+    printf("\nEnter Total Seats: ");
+    scanf("%d", &trains[*countTrain].totalSeats);
+
+    trains[*countTrain].availableSeats = trains[*countTrain].totalSeats;
+    trains[*countTrain].nextSeat = 1;
+
+    (*countTrain)++;
+
+    printf("\nTrain Added Successfully.\n");
 }
 
 void saveTrains(Train trains[], int countTrain){
