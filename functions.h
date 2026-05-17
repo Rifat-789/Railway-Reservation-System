@@ -35,6 +35,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain);
 void checkStatus(User users[], Train trains[], int countUser, int countTrain);
 void cancelTicket(User users[], int *countUser, Train trains[], int countTrain);
 void addTrain(Train trains[], int *countTrain);
+void deleteTrain(Train trains[], int *countTrain);
 void saveTrains(Train trains[], int countTrain);
 void saveUsers(User users[], int countUser);
 void saveAdmins(Admin admins[], int countAdmin);

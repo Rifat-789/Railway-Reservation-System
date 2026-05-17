@@ -262,6 +262,53 @@ void addTrain(Train trains[], int *countTrain){
     printf("\nTrain Added Successfully.\n");
 }
 
+void deleteTrain(Train trains[], int *countTrain){
+    int tempId;
+    int index = -1;
+    char confirm;
+
+    printf("\n====== DELETE TRAIN ======\n");
+    printf("Enter Train ID to Cancle: ");
+    if(scanf("%d", &tempId) != 1){
+        printf("Invalid Id! Id must be a number.");
+        while(getchar() != '\n');
+        return;
+    }
+
+    for (int i = 0; i < *countTrain; i++){
+        if (tempId == trains[i].trainId){
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1){
+        printf("\nTrain Not Found!\n");
+        return;
+    }
+
+    printf("Train ID: %d\n", trains[index].trainId);
+    printf("Destination: %s\n", trains[index].destination);
+    printf("Available seats: %d\n", trains[index].availableSeats);
+    printf("Ticket Price: %d\n", trains[index].price);
+
+    printf("Are you sure you want to Delete? (y/n): ");
+    scanf("% c", &confirm);
+
+    if (confirm != 'y' && confirm != 'Y'){
+        printf("\nDeletion aborted.\n");
+        return;
+    }
+
+    for (int i = index; i < *countTrain - 1; i++){
+        trains[i] = trains[i + 1];
+    }
+
+    (*countTrain)--;
+
+    printf("Train Deleted Successfully.\n");
+}
+
 void saveTrains(Train trains[], int countTrain){
     FILE *pFile = fopen("train.dat", "wb");
 
