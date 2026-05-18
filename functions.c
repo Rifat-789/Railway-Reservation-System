@@ -20,7 +20,7 @@ void loadTrains(Train trains[], int *countTrain){
 }
 
 void loadUsers(User users[], int *countUser){
-    FILE *pfile = fopen("train.dat", "rb");
+    FILE *pfile = fopen("user.dat", "rb");
 
     if(pfile == NULL){
         *countUser = 0;
@@ -80,26 +80,33 @@ void ticketGen(User users[], int countUser){
 void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     int tempChoice = 0;
 
-    printf("\n======= AVAILABLE TRAINS =======\n");
+    printf("\n======= AVAILABLE TRAINS =======\n\n");
 
-    printf("\n%-30s %-16s %-7s %-15s %-15s\n", "Destination", "Available Seats", "Price", "Departure Date", "Departure Time");
-    for (int i = 0; i < 81; i++){
+    printf("%-4s| %-28s| %-15s| %-7s| %-14s| %-14s|\n","No. ", "Destination", "Available Seats", "Price", "Departure Date", "Departure Time");
+    for (int i = 0; i < 96; i++){
         printf("-");
     }
 
     printf("\n");
 
     for(int i = 0; i < countTrain; i++){
-        printf("%d. %-30s|\n", i + 1, trains[i].destination);
-        printf("%-16d|\n", trains[i].availableSeats);
-        printf("%-7d|\n", trains[i].price);
-        printf("%-15s|\n", trains[i].departureDate);
-        printf("%-15s|\n", trains[i].departureTime);
+        char numstr[5];
+        sprintf(numstr, "%d.", i + 1);
+
+        printf("%-4s| %-28s| %-15d| %-7d| %-14s| %-14s|\n", numstr, trains[i].destination, trains[i].availableSeats, trains[i].price,
+                trains[i].departureDate, trains[i].departureTime);
     }
 
     printf("\n");
     printf("Select Train: ");
-    scanf("%d", &tempChoice);
+    if (scanf("%d", &tempChoice) != 1){
+        printf("Invalid input! Input must be a number\n");
+        while (getchar() != '\n');
+        return;
+    }
+
+    getchar();
+
 
     // validation check
     if(tempChoice < 1 || tempChoice > countTrain){
@@ -115,7 +122,13 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     }
 
     printf("How many tickets: ");
-    scanf("%d", &users[*countUser].ticketCount);
+    if (scanf("%d", &users[*countUser].ticketCount) != 1){
+        printf("Invalid input! Input must be a number\n");
+        while (getchar() != '\n');
+        return;
+    }
+
+    getchar();
 
     if(users[*countUser].ticketCount < 1 || users[*countUser].ticketCount > 10){                // Max 10 tickets
         printf("Maximum 10 tickets allowed!\n");
@@ -154,7 +167,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     printf("\nTotal Bill : %d\n", users[*countUser].totalBill);
 
-    printf("\nBooking Successful!\n");
+    printf("\nBooking Successful!\n\n");
 
     (*countUser)++;
 }
@@ -204,7 +217,7 @@ void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
     printf("\n====== CANCLE TICKET ======\n");
     printf("Enter Ticket ID to Cancle: ");
     if(scanf("%d", &tempId) != 1){
-        printf("Invalid Id! Id must be a number.");
+        printf("Invalid Id! Id must be a number.\n");
         while(getchar() != '\n');
         return;
     }
@@ -245,7 +258,7 @@ void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     (*countUser)--;
 
-    printf("Ticket canceled successfully.\n");
+    printf("Ticket canceled successfully.\n\n");
 
 }
 
@@ -257,13 +270,31 @@ void addTrain(Train trains[], int *countTrain){
     trains[*countTrain].destination[strcspn(trains[*countTrain].destination, "\n")] = '\0';                 // strcspn - finds the first occurance of any charecter in a string
 
     printf("\nEnter Train ID: ");
-    scanf("%d", &trains[*countTrain].trainId);
+    if (scanf("%d", &trains[*countTrain].trainId) != 1){
+        printf("Invalid input! Input must be a number\n");
+        while (getchar() != '\n');
+        return;
+    }
+
+    getchar();
 
     printf("\nEnter Ticket price: ");
-    scanf("%d", &trains[*countTrain].price);
+    if (scanf("%d", &trains[*countTrain].price) != 1){
+        printf("Invalid input! Input must be a number\n");
+        while (getchar() != '\n');
+        return;
+    }
+
+    getchar();
 
     printf("\nEnter Total Seats: ");
-    scanf("%d", &trains[*countTrain].totalSeats);
+    if (scanf("%d", &trains[*countTrain].totalSeats) != 1){
+        printf("Invalid input! Input must be a number\n");
+        while (getchar() != '\n');
+        return;
+    }
+
+    getchar();
 
     printf("\nEnter Departure Date: ");
     fgets(trains[*countTrain].departureDate, sizeof(trains[*countTrain].departureDate), stdin);
@@ -278,7 +309,7 @@ void addTrain(Train trains[], int *countTrain){
 
     (*countTrain)++;
 
-    printf("\nTrain Added Successfully.\n");
+    printf("\nTrain Added Successfully.\n\n");
 }
 
 void deleteTrain(Train trains[], int *countTrain){
@@ -289,7 +320,7 @@ void deleteTrain(Train trains[], int *countTrain){
     printf("\n====== DELETE TRAIN ======\n");
     printf("Enter Train ID to Cancle: ");
     if(scanf("%d", &tempId) != 1){
-        printf("Invalid Id! Id must be a number.");
+        printf("Invalid Id! Id must be a number.\n");
         while(getchar() != '\n');
         return;
     }
@@ -325,7 +356,7 @@ void deleteTrain(Train trains[], int *countTrain){
 
     (*countTrain)--;
 
-    printf("Train Deleted Successfully.\n");
+    printf("Train Deleted Successfully.\n\n");
 }
 
 void saveTrains(Train trains[], int countTrain){
@@ -333,7 +364,6 @@ void saveTrains(Train trains[], int countTrain){
 
     if (pFile == NULL){
         printf("Error saving the data!");
-        fclose(pFile);
         return;
     }
 
@@ -344,31 +374,29 @@ void saveTrains(Train trains[], int countTrain){
 }
 
 void saveUsers(User users[], int countUser){
-    FILE *pFile = fopen("train.dat", "wb");
+    FILE *pFile = fopen("user.dat", "wb");
 
     if (pFile == NULL){
         printf("Error saving the data!");
-        fclose(pFile);
         return;
     }
 
     fwrite(&countUser, sizeof(int), 1, pFile);
-    fwrite(users, sizeof(Train), countUser, pFile);
+    fwrite(users, sizeof(User), countUser, pFile);
 
     fclose(pFile);
 }
 
 void saveAdmins(Admin admins[], int countAdmin){
-    FILE *pFile = fopen("train.dat", "wb");
+    FILE *pFile = fopen("admin.dat", "wb");
 
     if (pFile == NULL){
         printf("Error saving the data!");
-        fclose(pFile);
         return;
     }
 
     fwrite(&countAdmin, sizeof(int), 1, pFile);
-    fwrite(admins, sizeof(Train), countAdmin, pFile);
+    fwrite(admins, sizeof(Admin), countAdmin, pFile);
 
     fclose(pFile);
 }

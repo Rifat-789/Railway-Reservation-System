@@ -71,7 +71,6 @@ int main(){
                     saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                     printf("Press enter to continue!");
                     getchar();
-                    getchar();
                     break;
 
                 case 2:
@@ -98,7 +97,6 @@ int main(){
                     cancelTicket(users, &countUser, trains, countTrain);
                     saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                     printf("Press enter to continue!");
-                    getchar();
                     getchar();
                     break;
 
@@ -168,7 +166,6 @@ int main(){
                         saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                         printf("Press enter to continue!");
                         getchar();
-                        getchar();
                         
                         break;
 
@@ -182,7 +179,6 @@ int main(){
                         deleteTrain(trains, &countTrain);
                         saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                         printf("Press enter to continue!");
-                        getchar();
                         getchar();
                         
                         break;
