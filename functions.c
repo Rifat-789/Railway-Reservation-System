@@ -82,13 +82,22 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
 
     printf("\n======= AVAILABLE TRAINS =======\n");
 
-    for(int i = 0; i < countTrain; i++){
-        printf("%d. %s\n", i + 1, trains[i].destination);
-        printf("Train ID : %d\n", trains[i].trainId);
-        printf("Price    : %d\n\n", trains[i].price);
-        printf("Availabel Seats: %d\n", trains[i].availableSeats);
+    printf("\n%-30s %-16s %-7s %-15s %-15s\n", "Destination", "Available Seats", "Price", "Departure Date", "Departure Time");
+    for (int i = 0; i < 81; i++){
+        printf("-");
     }
 
+    printf("\n");
+
+    for(int i = 0; i < countTrain; i++){
+        printf("%d. %-30s|\n", i + 1, trains[i].destination);
+        printf("%-16d|\n", trains[i].availableSeats);
+        printf("%-7d|\n", trains[i].price);
+        printf("%-15s|\n", trains[i].departureDate);
+        printf("%-15s|\n", trains[i].departureTime);
+    }
+
+    printf("\n");
     printf("Select Train: ");
     scanf("%d", &tempChoice);
 

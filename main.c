@@ -68,6 +68,7 @@ int main(){
                     #endif
 
                     bookTicket(users, &countUser, trains, countTrain);
+                    saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                     printf("Press enter to continue!");
                     getchar();
                     getchar();
@@ -81,6 +82,7 @@ int main(){
                     #endif
 
                     checkStatus(users, trains, countUser, countTrain);
+                    saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                     printf("Press enter to continue!");
                     getchar();
                     getchar();
@@ -94,6 +96,7 @@ int main(){
                     #endif
 
                     cancelTicket(users, &countUser, trains, countTrain);
+                    saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                     printf("Press enter to continue!");
                     getchar();
                     getchar();
@@ -162,6 +165,7 @@ int main(){
                         #endif
 
                         addTrain(trains, &countTrain);
+                        saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                         printf("Press enter to continue!");
                         getchar();
                         getchar();
@@ -176,6 +180,7 @@ int main(){
                         #endif
 
                         deleteTrain(trains, &countTrain);
+                        saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                         printf("Press enter to continue!");
                         getchar();
                         getchar();
