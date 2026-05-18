@@ -24,6 +24,8 @@ typedef struct {
     int totalSeats;
     int availableSeats;
     int nextSeat;
+    char departureDate[12];
+    char departureTime[12];
 } Train;
 
 void loadTrains(Train trains[], int *countTrain);

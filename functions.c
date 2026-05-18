@@ -213,7 +213,7 @@ void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
     }
 
     printf("Canceling the following booking: \n");
-    checkStatus(users, trains, countUser, countTrain);
+    checkStatus(users, trains, *countUser, countTrain);
 
     printf("Are you sure you want to cancle? (y/n): ");
     scanf("% c", &confirm);
@@ -242,8 +242,10 @@ void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
 
 void addTrain(Train trains[], int *countTrain){
 
+    getchar();
     printf("Enter Train Destination: ");
-    scanf("%s", &trains[*countTrain].destination);
+    fgets(trains[*countTrain].destination, sizeof(trains[*countTrain].destination), stdin);                 // scanf doesn't work
+    trains[*countTrain].destination[strcspn(trains[*countTrain].destination, "\n")] = '\0';                 // strcspn - finds the first occurance of any charecter in a string
 
     printf("\nEnter Train ID: ");
     scanf("%d", &trains[*countTrain].trainId);
@@ -253,6 +255,14 @@ void addTrain(Train trains[], int *countTrain){
 
     printf("\nEnter Total Seats: ");
     scanf("%d", &trains[*countTrain].totalSeats);
+
+    printf("\nEnter Departure Date: ");
+    fgets(trains[*countTrain].departureDate, sizeof(trains[*countTrain].departureDate), stdin);
+    trains[*countTrain].departureDate[strcspn(trains[*countTrain].departureDate, "\n")] = '\0';
+
+    printf("\nEnter Departure Time: ");
+    fgets(trains[*countTrain].departureTime, sizeof(trains[*countTrain].departureTime), stdin);
+    trains[*countTrain].departureTime[strcspn(trains[*countTrain].departureTime, "\n")] = '\0';
 
     trains[*countTrain].availableSeats = trains[*countTrain].totalSeats;
     trains[*countTrain].nextSeat = 1;
