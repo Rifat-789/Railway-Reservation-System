@@ -262,6 +262,52 @@ void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
 
 }
 
+void adminLogin(Admin admins[], int *countAdmin){
+    strcpy(admins[0].userName, "Rifat");
+    strcpy(admins[0].password, "12345");
+
+    strcpy(admins[1].userName, "Sayeem");
+    strcpy(admins[1].userName, "00000");
+
+    *countAdmin = 2;
+
+    char tempU[20];
+    char tempP[20];
+    printf("Enter Username: ");
+    scanf("%s", &tempU);
+
+    if (strcmp(tempU, admins[0].userName) == 0 || strcmp(tempU, admins[1].userName) == 0){
+
+        printf("\n\n");
+
+        printf("Enter Password: ");
+        scanf("%s", &tempP);
+
+        if (strcmp(tempU, admins[0].userName) == 0){
+            if (strcmp(tempP, admins[0].password) == 0){
+                printf("\nWelcome Rifat\n");
+            }
+
+            else{
+                printf("\nInvalid Password!\n");
+                return;
+            }
+        }
+
+        else if(strcmp(tempU, admins[1].userName) == 0){
+            if (strcmp(tempP, admins[1].password) == 0){
+                printf("\nWelcome Sayeem\n");
+            }
+
+            else{
+                printf("\nInvalid Password!\n");
+                return;
+            }
+        }
+            
+    }
+}
+
 void addTrain(Train trains[], int *countTrain){
 
     getchar();

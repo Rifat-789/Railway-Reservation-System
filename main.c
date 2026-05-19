@@ -130,8 +130,10 @@ int main(){
 
                 int tempChoice = 0;
 
+                adminLogin(admins, &countAdmin);
+
                 printf("1. Update Status\n");
-                printf("2. Exit\n");
+                printf("2. Go Back to Main Menu\n");
                 printf("\n");
                 printf("Enter your choice: ");
                 scanf("%d", &tempChoice);
