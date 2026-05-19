@@ -75,7 +75,7 @@ int main(){
 
                 case 2:
                     #ifdef _WIN32
-                        system("cle");
+                        system("cls");
                     #else
                         system("clear");
                     #endif

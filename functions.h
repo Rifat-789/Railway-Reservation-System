@@ -5,6 +5,7 @@
 #include<stdlib.h>
 
 typedef struct {
+    char name[25];
     int ticketId;
     int trainId;
     int ticketCount;
