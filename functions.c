@@ -192,42 +192,101 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     (*countUser)++;
 }
 
-void checkStatus(User users[], Train trains[], int countUser, int countTrain){
-    if (countUser == 0){
-        printf("No bookings found!\n");
-        return;
-    }
+void printTicket(User users[], Train trains[], int countTrain, int countUser){
+    printf("\n======= TICKET ======\n");
+    printf("Ticket ID: %d\n", users[countUser].ticketId);
+    printf("Passenger: %s\n", users[countUser].name);
+    printf("Train ID: %d\n", users[countUser].trainId);
 
     int trainIndex = -1;
-
     for (int i = 0; i < countTrain; i++){
-        if (trains[i].trainId == users[countUser - 1].trainId){
+        if (trains[i].trainId = users[countUser].trainId){
             trainIndex = i;
             break;
         }
     }
 
-    printf("\n\n======= TICKET =======\n\n");
-
-    printf("Passenger Name: %s\n", users[countUser - 1].name);
-
-    printf("Ticket ID   : %d\n", users[countUser - 1].ticketId);
-
-    printf("Train ID    : %d\n", users[countUser - 1].trainId);
-
     if (trainIndex != -1){
-        printf("Destination : %s\n", trains[trainIndex].destination);
+        printf("Destination: %s\n", trains[trainIndex].destination);
+        printf("Departure: %s at %s\n", trains[trainIndex].departureDate, trains[trainIndex].departureTime);
+    }
 
-        printf("Tickets     : %d\n", users[countUser - 1].ticketCount);
+    else{
+        printf("Destionation: Unknown\n");
+    }
 
-        printf("Seats       : ");
+    printf("Tickets       : %d\n", users[countUser].ticketCount);
+    printf("Seats         :");
+    for (int i = 0; i < users[countUser].ticketCount; i++){
+        printf("%d, ", users[countUser].seats[i]);
+    }
 
-        for(int i = 0; i < users[countUser - 1].ticketCount; i++){
+    printf("\nTotal Bill  : %d\n", users[countUser].totalBill);
+    printf("========================\n");
+}
 
-            printf("%d ", users[countUser - 1].seats[i]);
+void checkStatus(User users[], Train trains[], int countUser, int countTrain){
+    int choice;
+    printf("\n======= CHECK TICKET STATUS =======\n");
+    printf("1. Search by Ticket ID\n");
+    printf("2. Search by Passenger Name\n");
+
+    if (scanf("%d", &choice) != 1){
+        printf("Invalid input! Input must be an integer\n");
+        while (getchar() != '\n');
+        return;
+    }
+    getchar();
+
+    if (choice == 1){
+        int tempId;
+        printf("Enter Ticket ID: ");
+        if (scanf("%d", &tempId) != 1){
+            printf("Invalid input! Input must be an integer\n");
+            while (getchar() != '\n');
+            return;
         }
-        
-        printf("\nTotal Bill: %d\n", users[countUser - 1].totalBill);
+
+        int found = 0;
+        for (int i = 0; i < countUser; i++){
+            if (users[i].ticketId == tempId){
+                printTicket(users, trains, countTrain, i);
+                found = 1;
+                break;
+            }
+        }
+
+        if (!found){
+            printf("No ticket found!\n");
+        }
+
+    }
+
+    else if (choice == 2){
+        char tempName[50];
+        printf("Enter Passenger Name: ");
+        fgets(tempName, sizeof(tempName), stdin);
+        tempName[strcspn(tempName, "\n")] = '\0';
+
+        int found = 0;
+        for (int i = 0; i < countUser; i++){
+            if (_stricmp(users[i].name, tempName) == 0){
+                printTicket(users, trains, countTrain, i);
+                found++;
+            }
+        }
+
+        if (!found){
+            printf("No ticket found!\n");
+        }
+
+        else{
+            printf("\n%d booking(s) found.\n", found);
+        }
+    }
+
+    else{
+        printf("Invalid option!\n");
     }
 }
 
@@ -300,7 +359,7 @@ void adminLogin(Admin admins[], int *countAdmin){
 
     if (strcmp(tempU, admins[0].userName) == 0 || strcmp(tempU, admins[1].userName) == 0){
 
-        printf("\n\n");
+        printf("\n");
 
         printf("Enter Password: ");
         scanf("%s", &tempP);

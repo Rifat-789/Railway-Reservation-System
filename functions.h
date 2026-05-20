@@ -5,7 +5,7 @@
 #include<stdlib.h>
 
 typedef struct {
-    char name[25];
+    char name[50];
     int ticketId;
     int trainId;
     int ticketCount;
@@ -34,6 +34,7 @@ void loadUsers(User users[], int *countUser);
 void loadAdmins(Admin admins[], int *countAdmin);
 void printTitle(char title[], int padding);
 void ticketGen(User users[], int countUser);
+void printTicket(User users[], Train trains[], int countTrain, int countUser);
 void bookTicket(User users[], int *countUser, Train trains[], int countTrain);
 void checkStatus(User users[], Train trains[], int countUser, int countTrain);
 void cancelTicket(User users[], int *countUser, Train trains[], int countTrain);
