@@ -105,6 +105,12 @@ int processPayment(int totalBill) {
         char cvv[4];
         char cardHolder[50];
 
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
         printf("\nEnter Cardholder Name: ");
         fgets(cardHolder, sizeof(cardHolder), stdin);
         cardHolder[strcspn(cardHolder, "\n")] = '\0';
@@ -139,6 +145,12 @@ int processPayment(int totalBill) {
         char phone[12];
         char pin[6];
 
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
         printf("\n1. bKash\n");
         printf("2. Nagad\n");
         printf("Select: ");
@@ -152,6 +164,12 @@ int processPayment(int totalBill) {
             return 0;
         }
 
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+
         printf("\nEnter Mobile Number (11 digits): ");
         scanf("%11s", phone);
         getchar();
@@ -164,6 +182,12 @@ int processPayment(int totalBill) {
         printf("Enter PIN: ");
         scanf("%5s", pin);
         getchar();
+
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
 
         printf("\n--- Processing Payment... ---\n");
         printf("Provider     : %s\n", provider == 1 ? "bKash" : "Nagad");
@@ -355,6 +379,13 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
 
     if (choice == 1){
         int tempId;
+
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+        
         printf("Enter Ticket ID: ");
         if (scanf("%d", &tempId) != 1){
             printf("Invalid input! Input must be an integer\n");
@@ -379,6 +410,13 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
 
     else if (choice == 2){
         char tempName[50];
+
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+        
         printf("Enter Passenger Name: ");
         fgets(tempName, sizeof(tempName), stdin);
         tempName[strcspn(tempName, "\n")] = '\0';
