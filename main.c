@@ -21,148 +21,41 @@ int main(){
     loadUsers(users, &countUser);
     loadAdmins(admins, &countAdmin);
     
-    printTitle(title, padding);
-
-    do {
-
-        #ifdef _WIN32
+    while (1){
+        #ifdef _WIN32               // Reset the terminal screen
             system("cls");
         #else
             system("clear");
         #endif
 
-
+        printTitle(title, padding);
         printf("1. User\n");
         printf("2. Admin\n");
-        printf("3. Exit\n");
-        printf("\n");
+        printf("3. Exit\n\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        getchar();
 
-
-        // For Users
+        // For User
         if (choice == 1){
-            #ifdef _WIN32
-                system("cls");
-            #else
-                system("clear");
-            #endif
-
-
             int tempChoice = 0;
-            printf("1. Book a ticket\n");
-            printf("2. Check Status\n");
-            printf("3. Cancle Ticket\n");
-            printf("4. Return to Main Menu\n");
-            printf("\n");
-            printf("Entet your choice: ");
-            scanf("%d", &tempChoice);
 
-
-            switch (tempChoice){
-                case 1:
-                    #ifdef _WIN32
-                        system("cls");
-                    #else
-                        system("clear");
-                    #endif
-
-                    bookTicket(users, &countUser, trains, countTrain);
-                    saveAll(trains, users, admins, countTrain, countUser, countAdmin);
-                    printf("Press enter to continue!");
-                    getchar();
-                    break;
-
-                case 2:
-                    #ifdef _WIN32
-                        system("cls");
-                    #else
-                        system("clear");
-                    #endif
-
-                    checkStatus(users, trains, countUser, countTrain);
-                    saveAll(trains, users, admins, countTrain, countUser, countAdmin);
-                    printf("Press enter to continue!");
-                    getchar();
-                    break;
-
-                case 3:
-                    #ifdef _WIN32
-                        system("cls");
-                    #else
-                        system("clear");
-                    #endif
-
-                    cancelTicket(users, &countUser, trains, countTrain);
-                    saveAll(trains, users, admins, countTrain, countUser, countAdmin);
-                    printf("Press enter to continue!");
-                    getchar();
-                    break;
-
-                case 4:
-                    #ifdef _WIN32
-                        system("cls");
-                    #else
-                        system("clear");
-                    #endif
-
-                    exit;
-                    printf("Press enter to continue!");
-                    getchar();
-                    getchar();
-                    break;
-                
-                    default:
-                    break;
-            }
-        }
-
-
-        // For Admin
-            else if (choice == 2){
+            while (tempChoice != 4){
                 #ifdef _WIN32
                     system("cls");
                 #else
                     system("clear");
                 #endif
 
-
-                int tempChoice = 0;
-
-                adminLogin(admins, &countAdmin);
-
-                #ifdef _WIN32
-                    system("cls");
-                #else
-                    system("clear");
-                #endif
-
-                printf("\n======= ADMIN PANNEL =======\n");
-                printf("1. Update Status\n");
-                printf("2. Return to Main Menu\n");
-                printf("\n");
-                printf("Enter your choice: ");
+                printf("1. Book a ticket\n");
+                printf("2. Check Status\n");
+                printf("3. Cancle Ticket\n");
+                printf("4. Return to Main Menu\n\n");
+                printf("Entet your choice: ");
                 scanf("%d", &tempChoice);
+                getchar();
 
-                if (tempChoice == 1){
-                    #ifdef _WIN32
-                        system("cls");
-                    #else
-                        system("clear");
-                    #endif
-
-
-                    int temp2 = 0;
-
-                    printf("1. Add Train\n");
-                    printf("2. Delete Train\n");
-                    printf("3. Return to Main Menu\n");
-                    printf("\n");
-                    printf("Enter your choice: ");
-                    scanf("%d", &temp2);
-
-                    switch (temp2)
-                    {
+                switch (tempChoice){
                     case 1:
                         #ifdef _WIN32
                             system("cls");
@@ -170,11 +63,10 @@ int main(){
                             system("clear");
                         #endif
 
-                        addTrain(trains, &countTrain);
+                        bookTicket(users, &countUser, trains, countTrain);
                         saveAll(trains, users, admins, countTrain, countUser, countAdmin);
-                        printf("Press enter to continue!");
+                        printf("\nPress enter to continue...");
                         getchar();
-                        
                         break;
 
                     case 2:
@@ -184,11 +76,9 @@ int main(){
                             system("clear");
                         #endif
 
-                        deleteTrain(trains, &countTrain);
-                        saveAll(trains, users, admins, countTrain, countUser, countAdmin);
-                        printf("Press enter to continue!");
+                        checkStatus(users, trains, countUser, countTrain);
+                        printf("\nPress enter to continue...");
                         getchar();
-                        
                         break;
 
                     case 3:
@@ -198,28 +88,118 @@ int main(){
                             system("clear");
                         #endif
 
-                        exit;
-                        printf("Press enter to continue!");
+                        cancelTicket(users, &countUser, trains, countTrain);
+                        saveAll(trains, users, admins, countTrain, countUser, countAdmin);
+                        printf("\nPress enter to continue...");
                         getchar();
-                        getchar();
-                        
                         break;
+
+                    case 4:
+                        break;                      // Returns to main menu
                     
-                    default:
+                        default:
+                            printf("Invalid choice!\n");
+                            getchar();
                         break;
-                    }
                 }
-            }     
-
-            else if (choice == 3){
-                exit;
             }
+        }
 
-    }    while(choice != 3);
+        // For Admin
+        else if (choice == 2){
+            #ifdef _WIN32
+                system("cls");
+            #else
+                system("clear");
+            #endif
 
-        
+            int tempChoice = 0;
 
+            adminLogin(admins, &countAdmin);
 
+            while (tempChoice != 2){
+
+                #ifdef _WIN32
+                    system("cls");
+                #else
+                    system("clear");
+                #endif
+
+                printf("======= ADMIN PANNEL =======\n");
+                printf("1. Update Status\n");
+                printf("2. Return to Main Menu\n\n");
+                printf("Enter your choice: ");
+                scanf("%d", &tempChoice);
+                getchar();
+
+                if (tempChoice == 1){
+                    int temp2 = 0;
+
+                    while (temp2 != 3){
+                        #ifdef _WIN32
+                            system("cls");
+                        #else
+                            system("clear");
+                        #endif
+
+                        printf("1. Add Train\n");
+                        printf("2. Delete Train\n");
+                        printf("3. Return to Admin Menu\n\n");
+                        printf("Enter your choice: ");
+                        scanf("%d", &temp2);
+                        getchar();
+
+                        switch (temp2){
+                            case 1:
+                                #ifdef _WIN32
+                                    system("cls");
+                                #else
+                                    system("clear");
+                                #endif
+
+                                addTrain(trains, &countTrain);
+                                saveAll(trains, users, admins, countTrain, countUser, countAdmin);
+                                printf("\nPress enter to continue...");
+                                getchar();
+                                
+                                break;
+
+                            case 2:
+                                #ifdef _WIN32
+                                    system("cls");
+                                #else
+                                    system("clear");
+                                #endif
+
+                                deleteTrain(trains, &countTrain);
+                                saveAll(trains, users, admins, countTrain, countUser, countAdmin);
+                                printf("\nPress enter to continue...");
+                                getchar();
+                                
+                                break;
+
+                            case 3:
+                                break;                  // Returns to admin menu
+                            
+                            default:
+                                printf("Invalid choice!\n");
+                                getchar();
+                                break;
+                        }
+                    }
+                }  
+
+                else if (tempChoice == 2){
+                    break;
+                }
+            }
+        }
+
+        else if (choice == 3){
+            printf("Goodbye!\n");
+            exit(0);
+        }
+    }
 
     return 0;
 }

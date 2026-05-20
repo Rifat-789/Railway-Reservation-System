@@ -130,7 +130,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     fgets(users[*countUser].name, sizeof(users[*countUser].name), stdin);                   // For strings with space
     users[*countUser].name[strcspn(users[*countUser].name, "\n")] = '\0';
 
-    printf("How many tickets: ");
+    printf("\nHow many tickets: ");
     if (scanf("%d", &users[*countUser].ticketCount) != 1){
         printf("Invalid input! Input must be a number\n");
         while (getchar() != '\n');
@@ -386,8 +386,6 @@ void adminLogin(Admin admins[], int *countAdmin){
 }
 
 void addTrain(Train trains[], int *countTrain){
-
-    getchar();
     printf("Enter Train Destination: ");
     fgets(trains[*countTrain].destination, sizeof(trains[*countTrain].destination), stdin);                 // scanf doesn't work
     trains[*countTrain].destination[strcspn(trains[*countTrain].destination, "\n")] = '\0';                 // strcspn - finds the first occurance of any charecter in a string
@@ -432,7 +430,7 @@ void addTrain(Train trains[], int *countTrain){
 
     (*countTrain)++;
 
-    printf("\nTrain Added Successfully.\n\n");
+    printf("\nTrain Added Successfully.\n");
 }
 
 void deleteTrain(Train trains[], int *countTrain){
