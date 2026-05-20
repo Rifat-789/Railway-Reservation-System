@@ -84,7 +84,6 @@ int main(){
                     saveAll(trains, users, admins, countTrain, countUser, countAdmin);
                     printf("Press enter to continue!");
                     getchar();
-                    getchar();
                     break;
 
                 case 3:
@@ -132,8 +131,15 @@ int main(){
 
                 adminLogin(admins, &countAdmin);
 
+                #ifdef _WIN32
+                    system("cls");
+                #else
+                    system("clear");
+                #endif
+
+                printf("\n======= ADMIN PANNEL =======\n");
                 printf("1. Update Status\n");
-                printf("2. Go Back to Main Menu\n");
+                printf("2. Return to Main Menu\n");
                 printf("\n");
                 printf("Enter your choice: ");
                 scanf("%d", &tempChoice);
@@ -150,7 +156,7 @@ int main(){
 
                     printf("1. Add Train\n");
                     printf("2. Delete Train\n");
-                    printf("3. Exit\n");
+                    printf("3. Return to Main Menu\n");
                     printf("\n");
                     printf("Enter your choice: ");
                     scanf("%d", &temp2);

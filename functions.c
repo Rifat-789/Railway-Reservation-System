@@ -5,16 +5,15 @@
 #include<time.h>
 
 void loadTrains(Train trains[], int *countTrain){
-    FILE *pfile = fopen("train.dat", "rb");
+    FILE *pfile = fopen("train.dat", "rb");             // Opens train.dat file
 
     if(pfile == NULL){
         *countTrain = 0;
-        fclose(pfile);
         return;
     }
 
-    fread(countTrain, sizeof(int), 1, pfile);
-    fread(trains, sizeof(Train), *countTrain, pfile);
+    fread(countTrain, sizeof(int), 1, pfile);               // Reads number of trains from file
+    fread(trains, sizeof(Train), *countTrain, pfile);           // Reads trains details
 
     fclose(pfile);
 }
@@ -24,27 +23,25 @@ void loadUsers(User users[], int *countUser){
 
     if(pfile == NULL){
         *countUser = 0;
-        fclose(pfile);
         return;
     }
 
     fread(countUser, sizeof(int), 1, pfile);
-    fread(users, sizeof(Train), *countUser, pfile);
+    fread(users, sizeof(User), *countUser, pfile);
 
     fclose(pfile);
 }
 
 void loadAdmins(Admin admins[], int *countAdmin){
-    FILE *pfile = fopen("train.dat", "rb");
+    FILE *pfile = fopen("admin.dat", "rb");
 
     if(pfile == NULL){
         *countAdmin = 0;
-        fclose(pfile);
         return;
     }
 
     fread(countAdmin, sizeof(int), 1, pfile);
-    fread(admins, sizeof(Train), *countAdmin, pfile);
+    fread(admins, sizeof(Admin), *countAdmin, pfile);
 
     fclose(pfile);
 }
@@ -68,13 +65,13 @@ void printTitle(char title[], int padding){
 }
 
 void ticketGen(User users[], int countUser){
-    srand(time(NULL));
+    srand(time(NULL));                      // generates random seed per second
 
-    int randPart = rand() % 9000 + 1000;
+    int randPart = rand() % 9000 + 1000;                // generates random 4 digit number for random part of ticker   
 
-    int temp = countUser + 1;
+    int temp = countUser + 1;                       //  used for the first part of the ticket
 
-    users[countUser].ticketId = (temp * 10000) + randPart;
+    users[countUser].ticketId = (temp * 10000) + randPart;              // add both part and make a uniqe ticket id
 }
 
 void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
@@ -83,7 +80,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     printf("\n======= AVAILABLE TRAINS =======\n\n");
 
     printf("%-4s| %-28s| %-15s| %-7s| %-14s| %-14s|\n","No. ", "Destination", "Available Seats", "Price", "Departure Date", "Departure Time");
-    for (int i = 0; i < 96; i++){
+    for (int i = 0; i < 96; i++){               // number of charecters defined
         printf("-");
     }
 
@@ -105,9 +102,9 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
         return;
     }
 
-    getchar();
+    getchar();     // for input buffer
 
-    #ifdef _WIN32 
+    #ifdef _WIN32                   //  Refresh page
         system("cls");
     #else
         system("clear");
@@ -130,7 +127,7 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     printf("\n");
 
     printf("Enter your name: ");
-    fgets(users[*countUser].name, sizeof(users[*countUser].name), stdin);
+    fgets(users[*countUser].name, sizeof(users[*countUser].name), stdin);                   // For strings with space
     users[*countUser].name[strcspn(users[*countUser].name, "\n")] = '\0';
 
     printf("How many tickets: ");
@@ -200,7 +197,7 @@ void printTicket(User users[], Train trains[], int countTrain, int countUser){
 
     int trainIndex = -1;
     for (int i = 0; i < countTrain; i++){
-        if (trains[i].trainId = users[countUser].trainId){
+        if (trains[i].trainId == users[countUser].trainId){
             trainIndex = i;
             break;
         }
@@ -216,7 +213,7 @@ void printTicket(User users[], Train trains[], int countTrain, int countUser){
     }
 
     printf("Tickets       : %d\n", users[countUser].ticketCount);
-    printf("Seats         :");
+    printf("Seats         : ");
     for (int i = 0; i < users[countUser].ticketCount; i++){
         printf("%d, ", users[countUser].seats[i]);
     }
@@ -277,9 +274,8 @@ void checkStatus(User users[], Train trains[], int countUser, int countTrain){
         }
 
         if (!found){
-            printf("No ticket found!\n");
+            printf("No tickets found!\n");
         }
-
         else{
             printf("\n%d booking(s) found.\n", found);
         }
@@ -316,10 +312,10 @@ void cancelTicket(User users[], int *countUser, Train trains[], int countTrain){
     }
 
     printf("Canceling the following booking: \n");
-    checkStatus(users, trains, *countUser, countTrain);
+    printTicket(users, trains, countTrain, index);
 
     printf("Are you sure you want to cancle? (y/n): ");
-    scanf("% c", &confirm);
+    scanf(" %c", &confirm);
 
     if (confirm != 'y' && confirm != 'Y'){
         printf("Cancellation aborted.\n");
@@ -348,21 +344,21 @@ void adminLogin(Admin admins[], int *countAdmin){
     strcpy(admins[0].password, "12345");
 
     strcpy(admins[1].userName, "Sayeem");
-    strcpy(admins[1].userName, "00000");
+    strcpy(admins[1].password, "00000");
 
     *countAdmin = 2;
 
     char tempU[20];
     char tempP[20];
     printf("Enter Username: ");
-    scanf("%s", &tempU);
+    scanf("%s", tempU);
 
     if (strcmp(tempU, admins[0].userName) == 0 || strcmp(tempU, admins[1].userName) == 0){
 
         printf("\n");
 
         printf("Enter Password: ");
-        scanf("%s", &tempP);
+        scanf("%s", tempP);
 
         if (strcmp(tempU, admins[0].userName) == 0){
             if (strcmp(tempP, admins[0].password) == 0){
@@ -470,7 +466,7 @@ void deleteTrain(Train trains[], int *countTrain){
     printf("Ticket Price: %d\n", trains[index].price);
 
     printf("Are you sure you want to Delete? (y/n): ");
-    scanf("% c", &confirm);
+    scanf(" %c", &confirm);
 
     if (confirm != 'y' && confirm != 'Y'){
         printf("\nDeletion aborted.\n");
