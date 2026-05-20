@@ -74,6 +74,116 @@ void ticketGen(User users[], int countUser){
     users[countUser].ticketId = (temp * 10000) + randPart;              // add both part and make a uniqe ticket id
 }
 
+int processPayment(int totalBill) {
+    int method;
+
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+
+    printf("\n======= PAYMENT PAGE =======\n");
+    printf("Total Amount Due: %d BDT\n\n", totalBill);
+    printf("Select Payment Method:\n");
+    printf("1. Card\n");
+    printf("2. bKash / Nagad\n");
+    printf("3. Cancel Payment\n\n");
+    printf("Enter your choice: ");
+
+    if (scanf("%d", &method) != 1) {
+        printf("Invalid input!\n");
+        while (getchar() != '\n');
+        return 0;
+    }
+    getchar();
+
+    // Card
+    if (method == 1) {
+        char cardNumber[20];
+        char expiryDate[6];
+        char cvv[4];
+        char cardHolder[50];
+
+        printf("\nEnter Cardholder Name: ");
+        fgets(cardHolder, sizeof(cardHolder), stdin);
+        cardHolder[strcspn(cardHolder, "\n")] = '\0';
+
+        printf("Enter Card Number (16 digits): ");
+        scanf("%19s", cardNumber);
+        getchar();
+
+        if (strlen(cardNumber) != 16) {
+            printf("Invalid card number! Payment failed.\n");
+            return 0;
+        }
+
+        printf("Enter Expiry Date (MM/YY): ");
+        scanf("%5s", expiryDate);
+        getchar();
+
+        printf("Enter CVV: ");
+        scanf("%3s", cvv);
+        getchar();
+
+        printf("\n--- Processing Payment... ---\n");
+        printf("Cardholder   : %s\n", cardHolder);
+        printf("Card         : **** **** **** %.4s\n", cardNumber + 12);
+        printf("Amount       : %d BDT\n", totalBill);
+        printf("\n--- Payment Successful! ---\n");
+        return 1;
+    }
+
+    // bKash / Nagad
+    else if (method == 2) {
+        char phone[12];
+        char pin[6];
+
+        printf("\n1. bKash\n");
+        printf("2. Nagad\n");
+        printf("Select: ");
+
+        int provider;
+        scanf("%d", &provider);
+        getchar();
+
+        if (provider != 1 && provider != 2) {
+            printf("Invalid option! Payment failed.\n");
+            return 0;
+        }
+
+        printf("\nEnter Mobile Number (11 digits): ");
+        scanf("%11s", phone);
+        getchar();
+
+        if (strlen(phone) != 11) {
+            printf("Invalid phone number! Payment failed.\n");
+            return 0;
+        }
+
+        printf("Enter PIN: ");
+        scanf("%5s", pin);
+        getchar();
+
+        printf("\n--- Processing Payment... ---\n");
+        printf("Provider     : %s\n", provider == 1 ? "bKash" : "Nagad");
+        printf("Mobile       : %s\n", phone);
+        printf("Amount       : %d BDT\n", totalBill);
+        printf("\n--- Payment Successful! ---\n");
+        return 1;
+    }
+
+    else if (method == 3) {
+        printf("Payment cancelled.\n");
+        return 0;
+    }
+
+    else {
+        printf("Invalid option! Payment failed.\n");
+        return 0;
+    }
+}
+
 void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
     int tempChoice = 0;
 
@@ -172,7 +282,15 @@ void bookTicket(User users[], int *countUser, Train trains[], int countTrain){
         return;
     }
 
-    getchar();
+    int paymentSuccess = processPayment(users[*countUser].totalBill);
+
+    if (!paymentSuccess){
+        printf("\nBooking cancelled due to failed payment.\n");
+        users[*countUser].totalBill = 0;
+        users[*countUser].trainId = 0;
+        users[*countUser].ticketCount = 0;
+        return;
+    }
 
     printf("\nAssigned Seats: ");
 
